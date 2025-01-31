@@ -1,0 +1,18 @@
+{
+    "name": "ase-sparrow",
+    "displayName": "AseSparrowSheet",
+    "description": "Export Aseprite animations to Sparrow spritesheets",
+    "version": "0.1",
+    "author": { "name": "Cameron Taylor",
+                "email": "cameron.taylor.ninja@gmail.com",
+                "url": "https://funkin.me/" },
+    "contributors": [ "ninjamuffin99" ],
+    "publisher": "The Funkin' Crew Inc.",
+    "license": "CC-BY-4.0",
+    "categories": [ "Scripts" ],
+    "contributes": {
+      "scripts": [
+          { "path": "./sparrow.lua" }
+      ]
+    }
+  }
