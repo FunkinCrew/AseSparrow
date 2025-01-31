@@ -1,7 +1,7 @@
 {
     "name": "ase-sparrow",
-    "displayName": "AseSparrowSheet",
-    "description": "Export Aseprite animations to Sparrow spritesheets",
+    "displayName": "AseSparrow",
+    "description": "Export Aseprite animations to Sparrow V2 spritesheets",
     "version": "0.1",
     "author": { "name": "Cameron Taylor",
                 "email": "cameron.taylor.ninja@gmail.com",

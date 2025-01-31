@@ -1,4 +1,4 @@
-# AseSparrowSheet
+# AseSparrow
 
 An Aseprite extension to export animations into Sparrow V2 spritesheet format
 
