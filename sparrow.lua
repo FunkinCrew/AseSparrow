@@ -291,15 +291,15 @@ function exportXML(dlgData)
             -- how we need to make our potential spritesheet
             local frameSize = frameInfo.spriteSourceSize
             
-            local x = " x=" .. math.floor(atlasSize.x)
-            local y = " y=" .. math.floor(atlasSize.y)
-            local width = " width=" .. math.floor(atlasSize.w)
-            local height = " height=" .. math.floor(atlasSize.h)
+            local x = xmlWrap("x", math.floor(atlasSize.x))
+            local y = xmlWrap("y", math.floor(atlasSize.y))
+            local width = xmlWrap("width", math.floor(atlasSize.w))
+            local height = xmlWrap("height", math.floor(atlasSize.h))
             
-            local frameX = " frameX=" .. math.floor(frameSize.x)
-            local frameY = " frameY=" .. math.floor(frameSize.y)
-            local frameWidth = " frameWidth=" .. math.floor(frameSize.w)
-            local frameHeight = " frameHeight=" .. math.floor(frameSize.h)
+            local frameX = xmlWrap("frameX", math.floor(frameSize.x))
+            local frameY = xmlWrap("frameY", math.floor(frameSize.y))
+            local frameWidth = xmlWrap("frameWidth", math.floor(frameSize.w))
+            local frameHeight = xmlWrap("frameHeight", math.floor(frameSize.h))
 
             xmlSubtextures = xmlSubtextures .. '\t<SubTexture name="' .. frametag.name  .. string.format("%04d", j - rangeStart) .. '"' .. x .. y .. width .. height .. frameX .. frameY .. frameWidth .. frameHeight .. ' />\n'
         end
@@ -314,9 +314,10 @@ function exportXML(dlgData)
         xmlFile:write(xml)
         xmlFile:close()
     end
+end
 
-
-
+function xmlWrap(prop, value)
+    return ' ' .. prop .. '="' .. value .. '"'
 end
 
 
