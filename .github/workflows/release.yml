@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  push:
+jobs:
+  create-nightly-release:
+    if: startsWith(github.ref, 'refs/heads/main')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get Current Date
+      run: echo "NOW=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create ZIP archive
+      run: |
+        zip -r AseSparrow-nightly${{env.NOW}}.aseprite-extension . -x '.git/*'
+    - name: Create Nightly Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: bleeding
+        prerelease: true
+        name: Bleeding Build ${{env.NOW}}
+        files: AseSparrow-nightly${{env.NOW}}.aseprite-extension
+        generate_release_notes: true
