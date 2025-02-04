@@ -205,6 +205,9 @@ function exportSpriteSheet(dlgData)
 
     if dlgData.layer_options == "Visible Layers" then
         layers = getVisibleLayers()
+        app.range.layers = layers
+        layers = "**selected-layers**"
+
     elseif dlgData.layer_options == "Selected Layers" then
         -- note: undocumented functionality of ExportSpriteSheet, we can get the selected layers by passing in "**selected-layers**"
         -- https://github.com/aseprite/aseprite/blob/main/src/app/commands/cmd_export_sprite_sheet.cpp#L214
@@ -239,7 +242,7 @@ function exportSpriteSheet(dlgData)
         ignoreEmpty=false,
         mergeDuplicates=true,
         openGenerated=false,
-        layer="",
+        layer=layers,
         tag="",
         splitLayers=false,
         splitTags=false,
@@ -298,7 +301,7 @@ function exportXML(dlgData)
             local frameWidth = " frameWidth=" .. math.floor(frameSize.w)
             local frameHeight = " frameHeight=" .. math.floor(frameSize.h)
 
-            xmlSubtextures = xmlSubtextures .. '\t<SubTexture name="' .. frametag.name .. string.format("%04d", j - rangeStart) .. x .. y .. width .. height .. frameX .. frameY .. frameWidth .. frameHeight .. ' />\n'
+            xmlSubtextures = xmlSubtextures .. '\t<SubTexture name="' .. frametag.name  .. string.format("%04d", j - rangeStart) .. '"' .. x .. y .. width .. height .. frameX .. frameY .. frameWidth .. frameHeight .. ' />\n'
         end
 
     until true end
