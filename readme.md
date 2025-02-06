@@ -4,9 +4,9 @@ An Aseprite extension to export animations into Sparrow V2 spritesheet format
 
 # Installation
 
-Download the `.aseprite-extension` from the Github Releases, and then you should be able to double-click the file to install it easily. See the [Aseprite Documentation](https://www.aseprite.org/docs/extensions/) for further info on installing extensions into Aseprite.
+Download the `.aseprite-extension` from the [Github Releases](https://github.com/FunkinCrew/AseSparrow/releases), and then you should be able to double-click the file to install it easily. See the [Aseprite Documentation](https://www.aseprite.org/docs/extensions/) for further info on installing extensions into Aseprite.
 
-# Usage
+# Usage (Aseprite)
 
 Usage should be pretty simple and familiar if you've used Adobe Animate's "Export Sprite Sheet" option.
 
@@ -40,9 +40,12 @@ The command installs itself with the other exporting options, so it should be ju
   - The space between each frame in the spritesheet.
 
 ## Animations
-
+- `Frame Rate`
+  - Sparrow doesn't use "frame duration", so this will add extra "frames" into the sparrow .xml file, using the duration frame property in Aseprite. If you're using HaxeFlixel, you'd probably want this to match your `animation.add()`'s `frameRate` argument.
 - `Layers`
-  - (unimplemented) Allows you to specify certain layers to be exported only. Similar to Aseprite's feature. 
+  - Allows you to specify certain layers to be exported only. Similar to Aseprite's feature. 
+    - Visible: Currently visible layers will be exported
+    - Selected Layers: Currently selected layers will be exported
 - `Included Animations`
   - A list of animations that will be included in the exported file. 
 
