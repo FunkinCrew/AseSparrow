@@ -53,6 +53,11 @@ function openSpritesheetDialog()
     --     recurseGroups(layer)
     -- end
 
+    dlg:number{ id="frame_rate",
+              label="Frame Rate: ",
+              text="24",
+              decimals=0
+            }
     dlg:combobox{ id="layer_options",
               label="Layers: ",
               option="Visible Layers",
@@ -275,12 +280,16 @@ function exportXML(dlgData)
         local rangeStart = frametag.from
         local rangeEnd = frametag.to
 
+        local framerateOffset = 0
+
         for j = rangeStart, rangeEnd do
             local frameInfo = jsonObj.frames[j + 1]
             -- where in the texture atlas we need to look
             local atlasSize = frameInfo.frame
             -- how we need to make our potential spritesheet
             local frameSize = frameInfo.spriteSourceSize
+
+            local intendedDuration = math.floor(((frameInfo.duration * 0.001) / (1 / dlgData.frame_rate)) + 0.5)
             
             local x = xmlWrap("x", math.floor(atlasSize.x))
             local y = xmlWrap("y", math.floor(atlasSize.y))
@@ -292,7 +301,13 @@ function exportXML(dlgData)
             local frameWidth = xmlWrap("frameWidth", math.floor(frameSize.w))
             local frameHeight = xmlWrap("frameHeight", math.floor(frameSize.h))
 
-            xmlSubtextures = xmlSubtextures .. '\t<SubTexture name="' .. frametag.name  .. string.format("%04d", j - rangeStart) .. '"' .. x .. y .. width .. height .. frameX .. frameY .. frameWidth .. frameHeight .. ' />\n'
+            local i = 0
+            repeat 
+                xmlSubtextures = xmlSubtextures .. '\t<SubTexture name="' .. frametag.name  .. string.format("%04d", j - rangeStart + framerateOffset + i) .. '"' .. x .. y .. width .. height .. frameX .. frameY .. frameWidth .. frameHeight .. ' />\n'
+                i = i + 1
+            until i >= intendedDuration
+            framerateOffset = framerateOffset + (intendedDuration - 1)
+
         end
 
     until true end
