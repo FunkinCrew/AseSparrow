@@ -230,7 +230,7 @@ function exportSpriteSheet(dlgData)
         bestFit=true,
         textureFilename=dlgData.file_path .. ".png",
         dataFilename=dlgData.file_path .. ".json",
-        dataFormat=SpriteSheetDataFormat.JSON_HASH,
+        dataFormat=SpriteSheetDataFormat.JSON_ARRAY,
         filenameFormat="{title} ({layer}) {frame}.{extension}",
         borderPadding=dlgData.border_padding,
         shapePadding=dlgData.shape_padding,
@@ -266,13 +266,6 @@ function exportXML(dlgData)
     local xmlRoot = '<TextureAtlas imagePath="spritesheet.png">\n'
     local xmlSubtextures = ''
 
-    local frames = {}
-
-    -- we organize the frames so we can access them with an array like method (frames[1], frames[2], etc)
-    for k, v in pairs(jsonObj.frames) do
-        table.insert(frames, v)
-    end
-
     for i,frametag in ipairs(jsonObj.meta.frameTags) do repeat
         
         if dlgData["tag_" .. frametag.name] == false then
@@ -282,10 +275,8 @@ function exportXML(dlgData)
         local rangeStart = frametag.from
         local rangeEnd = frametag.to
 
-
-
         for j = rangeStart, rangeEnd do
-            local frameInfo = frames[j + 1]
+            local frameInfo = jsonObj.frames[j + 1]
             -- where in the texture atlas we need to look
             local atlasSize = frameInfo.frame
             -- how we need to make our potential spritesheet
@@ -319,8 +310,6 @@ end
 function xmlWrap(prop, value)
     return ' ' .. prop .. '="' .. value .. '"'
 end
-
-
 
 function readAll(file)
     local f = assert(io.open(file, "rb"))
