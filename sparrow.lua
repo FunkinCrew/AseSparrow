@@ -288,6 +288,7 @@ function exportXML(dlgData)
             local atlasSize = frameInfo.frame
             -- how we need to make our potential spritesheet
             local frameSize = frameInfo.spriteSourceSize
+            local sourceSize = frameInfo.sourceSize
 
             local intendedDuration = math.floor(((frameInfo.duration * 0.001) / (1 / dlgData.frame_rate)) + 0.5)
             
@@ -296,10 +297,10 @@ function exportXML(dlgData)
             local width = xmlWrap("width", math.floor(atlasSize.w))
             local height = xmlWrap("height", math.floor(atlasSize.h))
             
-            local frameX = xmlWrap("frameX", math.floor(frameSize.x))
-            local frameY = xmlWrap("frameY", math.floor(frameSize.y))
-            local frameWidth = xmlWrap("frameWidth", math.floor(frameSize.w))
-            local frameHeight = xmlWrap("frameHeight", math.floor(frameSize.h))
+            local frameX = xmlWrap("frameX", math.floor(-frameSize.x))
+            local frameY = xmlWrap("frameY", math.floor(-frameSize.y))
+            local frameWidth = xmlWrap("frameWidth", math.floor(sourceSize.w))
+            local frameHeight = xmlWrap("frameHeight", math.floor(sourceSize.h))
 
             local i = 0
             repeat 

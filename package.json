@@ -2,7 +2,7 @@
     "name": "ase-sparrow",
     "displayName": "AseSparrow",
     "description": "Export Aseprite animations to Sparrow V2 spritesheets",
-    "version": "0.1",
+    "version": "0.2",
     "author": { "name": "Cameron Taylor",
                 "email": "cameron.taylor.ninja@gmail.com",
                 "url": "https://funkin.me/" },
