@@ -12,6 +12,16 @@ jobs:
       run: echo "NOW=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Generate a changelog
+      uses: orhun/git-cliff-action@v3
+      with:
+        config: cliff.toml
+        args: --verbose --unreleased
+      env:
+        OUTPUT: CHANGELOG.md
+        GITHUB_REPO: ${{ github.repository }}
 
     - name: Create ZIP archive
       run: |
@@ -23,4 +33,4 @@ jobs:
         prerelease: true
         name: Bleeding Build ${{env.NOW}}
         files: AseSparrow-nightly${{env.NOW}}.aseprite-extension
-        generate_release_notes: true
+        body_path: CHANGELOG.md
