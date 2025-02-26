@@ -4,6 +4,11 @@ function init(plugin)
       title="Export to Sparrow Sprite Sheet",
       group="file_export_1",
       onclick=function()
+        -- app.alert "Text" if no animation tags in current sprite
+        if app.sprite.tags == nil or #app.sprite.tags == 0 then
+          app.alert{title="AseSparrow", text={"No animation tags found in current sprite!", "Please add tags to your sprite before exporting."}}
+          return
+        end
         openSpritesheetDialog()
       end,
       onenabled=function()
