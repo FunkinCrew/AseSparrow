@@ -87,6 +87,7 @@ function openSpritesheetDialog()
           label="Save Spritesheet As:",
           title="Path to save spritesheet to",
           save=true,
+          open=false
            }
     
 
@@ -268,7 +269,7 @@ function exportXML(dlgData)
     -- in each animation it will give you a to/from of which animations are in that tag
     -- from there, we get the sizing / positioning from jsonObj.frames, which we might have to access as an array? 
     local xmlHeader = '<?xml version="1.0" encoding="UTF-8"?>\n'
-    local xmlRoot = '<TextureAtlas imagePath="spritesheet.png">\n'
+    local xmlRoot = '<TextureAtlas imagePath="' .. app.fs.fileTitle(dlgData.file_path) .. '.png">\n'
     local xmlSubtextures = ''
 
     for i,frametag in ipairs(jsonObj.meta.frameTags) do repeat
