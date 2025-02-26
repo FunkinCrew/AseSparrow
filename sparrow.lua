@@ -111,6 +111,7 @@ function openSpritesheetDialog()
               label="Width (unimplemented)",
               text="128",
               decimals=0,
+              visible=false,
               onchange=function()
                 end }
     
@@ -118,6 +119,7 @@ function openSpritesheetDialog()
                 label="Height (unimplemented)",
                 text="128",
                 decimals=0,
+                visible=false,
                 onchange=function()
                   end }
     
@@ -153,6 +155,13 @@ function openSpritesheetDialog()
             local data = dlg.data
             generatePreview(data)
            end }
+
+    dlg:check{ id="keep_json",
+           label="",
+           text="Keep JSON spritesheet",
+           selected=false
+            }
+    
     dlg:endtabs{ id="tab_output", selected="tab_output"}
 
     -- Bottom buttons to confirm and crap
@@ -327,6 +336,16 @@ function exportXML(dlgData)
         xmlFile:write(xml)
         xmlFile:close()
     end
+
+    if dlgData.keep_json == false then
+        -- delete the json file
+        if app.os.name == "Windows" then
+            os.execute("del " .. dlgData.file_path .. ".json")
+        else
+            os.execute("rm " .. dlgData.file_path .. ".json")
+        end
+    end
+    
 end
 
 function xmlWrap(prop, value)
