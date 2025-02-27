@@ -92,7 +92,8 @@ function openSpritesheetDialog()
           label="Save Spritesheet As:",
           title="Path to save spritesheet to",
           save=true,
-          open=false
+          open=false,
+          filetypes={""},
            }
     
 
